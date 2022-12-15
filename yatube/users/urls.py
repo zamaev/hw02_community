@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView
 from django.urls import path
 
 from . import views
@@ -23,6 +23,12 @@ urlpatterns = [
             template_name='users/password_change_form.html'
         ),
         name='password_change_form',
+    ),
+    path(
+        'password_change/done/',
+        PasswordChangeDoneView.as_view(
+            template_name='users/password_change_done.html'
+        ),
     ),
     path(
         'password_reset/',
