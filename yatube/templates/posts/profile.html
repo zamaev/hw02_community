@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Профайл пользователя {{ user.first_name }} {{ user.last_name }}{% endblock %}
+{% block content %}
+  <h1>Все посты пользователя {{ user.first_name }} {{ user.last_name }}</h1>
+  <h3>Всего постов: <!-- --> </h3>   
+  {% for post in page_obj %}
+    <article>
+      <ul>
+        <li>
+          Автор: {{ user.first_name }} {{ user.last_name }}
+          <a href="<!-- -->">все посты пользователя</a>
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:'d E Y'}}
+        </li>
+      </ul>
+      <p>
+        {{ post.text }}
+      </p>
+      <a href="<!-- -->">подробная информация </a>
+    </article>       
+    <a href="<!-- -->">все записи группы</a>
+    <hr>
+  {% endfor %}
+
+  <!-- Остальные посты. после последнего нет черты -->
+  <!-- Здесь подключён паджинатор -->  
+{% endblock %}
