@@ -5,8 +5,5 @@
 {% block content %}
   <h1>{{ group.title }}</h1>
   {{ group.description|linebreaks }}
-  {% for post in page_obj %}
-    {% include 'posts/includes/post.html' %}
-  {% endfor %}
-  {% include 'posts/includes/paginator.html' %}
+  {% include 'posts/includes/posts.html' with show_author=True %}
 {% endblock %}
