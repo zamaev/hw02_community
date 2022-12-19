@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Пост <!-- Первые 30 букв поста -->{% endblock %}
+{% block title %}Пост {{ post.text|slice:'30' }}{% endblock %}
 {% block content %}
   <div class="row">
     <aside class="col-12 col-md-3">
@@ -9,20 +9,20 @@
         </li>
         {% if post.group %}
           <li class="list-group-item">
-            Группа: {{ post.group.title }}
+            Группа: {{ post.group }}
             <a href="{% url 'posts:group_list' post.group.slug %}">
               все записи группы
             </a>
           </li>
         {% endif %}
         <li class="list-group-item">
-          Автор: <!--Лев Толстой-->
+          Автор: {{ author.get_full_name }}
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          Всего постов автора:  <span ><!-- --></span>
+          Всего постов автора: <span>{{ author.posts.count }}</span>
         </li>
         <li class="list-group-item">
-          <a href="<!-- -->">
+          <a href="{% url 'posts:profile' author.username %}">
             все посты пользователя
           </a>
         </li>
@@ -30,18 +30,7 @@
     </aside>
     <article class="col-12 col-md-9">
       <p>
-        {{ post.text }}
-        <!--
-        [Фокшаны.] Еще переходъ до Фокшанъ, во время котораго я ѣхалъ съ 
-        Монго. Человѣкъ пустой, но съ твердыми, хотя и ложными убѣжденіями.
-        Генерал[у] по этому должно быть случаю, угодно было спрашивать о мое
-        мъ здоровьи.
-        Свинья! К[о]вырялъ носъ и ничего не написалъ — вотъ 2 упрека за 
-        нын[ѣшній]     день. Послѣдній упрекъ становится слишкомъ частъ, 
-        хотя походъ и можетъ служить въ немъ отчасти извиненіемъ. 
-        Отношенія мои съ товарищами становятся такъ пріятны, что мнѣ 
-        жалко бросить штабъ. Здоровье кажется (2) лучше. 
-        --> 
+        {{ post.text|linebreaks }}
       </p>
     </article>
   </div>
